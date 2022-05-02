@@ -95,7 +95,7 @@ const login = async function (req, res) {    //author can login this block
             msg: "userId is required"
         })
 
-        if (!/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(data.email)) {
+        if (!/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(userId)) {
             return res.status(400).send({
                 status: false,
                 msg: "userId is not valid"
@@ -212,7 +212,7 @@ const updatedblog = async function (req, res) {    //in this block author can up
             }
         }
 
-            if (!isValidData(authorData.tages.length==0)) {
+            if (!isValidData(authorData.tages)) {
                 return res.status(400).send({
                     status: false,
                     Message: "tages is required"
@@ -226,17 +226,13 @@ const updatedblog = async function (req, res) {    //in this block author can up
                 })
             }
 
-            if (!isValidData(authorData.subcategory.length==0)) {
+            if (!isValidData(authorData.subcategory)) {
                 return res.status(400).send({
                     status: false,
                     Message: "subcategory is required"
                 })
             }
 
-        if (Object.hasOwn(authorData, authorData.title)) {
-            if (ObjectValues(authorData, title).length == 0) return res.status(400).send({ status: false, data: "title is required" });
-
-        }
         await BlogsModel.findOneAndUpdate({ _id: blogId }, authorData, { new: true });
         let updatedblog = await BlogsModel.findOneAndUpdate({ _id: blogId }, { $set: { publishedAt: new Date(), new: true } });
 
