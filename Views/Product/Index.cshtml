@@ -1,0 +1,59 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<ProductDetail.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sCategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sCategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sCategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sCategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { isProductId = item.sProductId }) |
+                @Html.ActionLink("Details", "Details", new { isProductId = item.sProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { isProductId = item.sProductId })
+            </td>
+        </tr>
+
+    }
+
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</table>
