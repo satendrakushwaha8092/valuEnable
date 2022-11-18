@@ -2,11 +2,11 @@
 
 let arr=[1,2,2,3,4,1,9,9]
 
-// for(let i=0; i<arr.length; i++){
-//     for(let j=0; j<i; j++){
-//         if(arr[i]==arr[j]) console.log(arr[i])
-//     }
-// }
+for(let i=0; i<arr.length; i++){
+    for(let j=0; j<i; j++){
+        if(arr[i]==arr[j]) console.log(arr[i])
+    }
+}
 
 
 
